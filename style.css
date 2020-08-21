@@ -1,0 +1,43 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #BEE9E8;
+}
+
+header {
+    background: #1B4965;
+    text-align: center;
+    color: #62B6CB;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+
+
+.game_board {
+    display: grid;
+    width: 500px;
+    height: 500px;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 auto;
+    margin-top: 40px;
+    border: 5px solid #1B4965;
+    border-radius: 10px;
+}
+
+.cell {
+    border: 5px solid #1B4965;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #62b6cb;
+    color:#1b4965;
+    font-size:4em;
+    font-weight: bold;
+}
