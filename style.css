@@ -29,6 +29,11 @@ header {
     margin-top: 40px;
     border: 5px solid #1B4965;
     border-radius: 10px;
+    
+}
+
+.hidden {
+    display: none;
 }
 
 .cell {
@@ -40,4 +45,63 @@ header {
     color:#1b4965;
     font-size:4em;
     font-weight: bold;
+}
+
+.player_info {
+    color:#1B4965;
+    font-size: 2em;
+}
+
+.input_form {
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+    text-align: center;
+    
+}
+
+.player_group {
+    margin-top:20px;
+}
+
+input { 
+    padding: 15px;
+    border-radius: 5px;
+    background: #1A4965;
+    color: #62B6CB;
+    
+}
+
+input::placeholder {
+    color: #62b6cb;
+}
+
+#reset {
+    padding: 10px;
+    background: #1A4965;
+    color: #62b6cb;
+}
+
+.reset_button {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.submitButton {
+    margin-top: 15px;
+    padding:5px;
+    width: 100px;
+    color:#62b6cb;
+    background: #1A4965;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align:center;
+    margin-top:20px;
+    color:#1A4965;
 }

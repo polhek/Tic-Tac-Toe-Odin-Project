@@ -12,8 +12,25 @@
         <h1>Tic - Tac - Toe<br>The Odin Project</h1>
     </header>
 
+    <div class="input_form">
+        <form class="player_info">
+            <div class="player_group">
+                <label for="playerx">Player X:</label>
+                <input type="text" id="playerx" name="playerx" placeholder="Name of player X">
+            </div>
+
+            <div class="player_group">
+                <label for="playero">Player O:</label>
+                <input type="text" id="playero" name="playero" placeholder="Name of player O">
+            </div>
+            <div><button type="submit" class="submitButton"  >Play !</div>
+        </form>
+    </div> 
+        
+    <div class="container">
     
-        <div class="game_board">
+        <h1 class="game_text"></h1>
+        <div class="game_board hidden">
             <div class="cell"></div>
             <div class="cell"></div>
             <div class="cell"></div>
@@ -24,6 +41,11 @@
             <div class="cell"></div>
             <div class="cell"></div>
         </div>
+        <div class="reset_button hidden">
+            <button id="reset">Restart the game!</button>
+        </div>
+    </div>
+        
     
 
 
