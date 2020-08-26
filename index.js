@@ -2,8 +2,12 @@
 const playerFactory = (name, mark) => {
   const playTurn = (event, currentPlayer) => {
     const id = boardObject.cells.indexOf(event.target);
-    boardObject.boardArray[id] = currentPlayer;
+    
+    let newArray = boardObject.getBoard();
+    newArray[id] = currentPlayer;
+    boardObject.setBoard(newArray);
     boardObject.render();
+
   };
 
   return {
@@ -24,6 +28,14 @@ const boardObject = (() => {
       cells[idx].textContent = boardArray[idx];
     });
   };
+
+  const getBoard = () => {
+    return boardArray;
+  };
+
+  const setBoard = (newArray) => {
+    boardArray = newArray;
+  }
 
   const checkWin = (currentPlayer) => {
     const winArraysCombinations = [
@@ -46,7 +58,7 @@ const boardObject = (() => {
 
   const isDraw = (playerOne, playerTwo) => {
     return boardArray.every((cell) => {
-      return cell.includes(playerOne.mark) || cell.includes(playerTwo.mark);
+      return cell.includes(playerOne) || cell.includes(playerTwo);
     });
   };
 
@@ -55,7 +67,8 @@ const boardObject = (() => {
   };
 
   return {
-    boardArray,
+    getBoard,
+    setBoard,
     render,
     cells,
     checkWin,
@@ -66,7 +79,6 @@ const boardObject = (() => {
 
 // Display controller ...
 const displayController = (() => {
-  const player = playerFactory();
   const playerOneName = document.querySelector("#playerx");
   const playerTwoName = document.querySelector("#playero");
   const resetButton = document.querySelector(".reset_button");
@@ -83,21 +95,23 @@ const displayController = (() => {
   };
 
   gameBoard.addEventListener("click", (event) => {
-    event.preventDefault();
     if (event.target.classList.contains("cell")) {
       if (event.target.textContent === "") {
-        event.target.textContent = currentPlayer.mark;
-        player.playTurn(event, currentPlayer.mark);
-        gameText.textContent = `${currentPlayer.name}'s turn!`;
+        //event.target.textContent = currentPlayer.mark;
+        currentPlayer.playTurn(event, currentPlayer.mark);
+        gameText.textContent = `Player ${currentPlayer.mark}: ${currentPlayer.name}'s turn!`;
         if (boardObject.checkWin(currentPlayer)) {
           gameText.textContent = `${currentPlayer.name}'s a winner!`;
           boardObject.reset();
           boardObject.render();
+          
         } else if (boardObject.isDraw(playerOne.mark, playerTwo.mark)) {
-          gameText.textContent = `${currentPlayer.name}'s a winner!`;
+          gameText.textContent = `It's a Tie..`;
+          boardObject.reset();
+          boardObject.render();
         } else {
           switchPlayer();
-          gameText.textContent = `${currentPlayer.name}'s turn!`;
+          gameText.textContent = `Player ${currentPlayer.mark}: ${currentPlayer.name}'s turn!`;
         }
       }
     }
@@ -108,8 +122,8 @@ const displayController = (() => {
       playerOne = playerFactory(playerOneName.value, "X");
       playerTwo = playerFactory(playerTwoName.value, "O");
       currentPlayer = playerOne;
-      gameText.textContent = `${currentPlayer.name}'s turn!`;
-      console.log(playerOne)
+      gameText.textContent = `Player ${currentPlayer.mark}: ${currentPlayer.name}'s turn!`;
+      
     }
   };
 
@@ -117,7 +131,7 @@ const displayController = (() => {
     event.preventDefault();
     if (playerOneName.value !== "" && playerTwoName.value !== "") {
       init();
-      console.log("init");
+      
       formDiv.style.display = "none";
       gameBoard.classList.remove("hidden");
       resetButton.classList.remove("hidden");
@@ -128,9 +142,10 @@ const displayController = (() => {
 
   resetButton.addEventListener("click", () => {
     
-    playerTwoName.value = "";
-    playerOneName.value = "";
-    window.location.reload();
+   playerOneName.value = "";
+   playerTwoName.value = "";
+   window.location.reload();
+    
   });
   return { currentPlayer, playerOne, playerTwo, init };
 })();
